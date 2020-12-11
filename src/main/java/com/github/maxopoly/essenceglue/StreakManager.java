@@ -91,11 +91,11 @@ public class StreakManager {
 				EssenceGluePlugin.instance().getLogger().severe(p.getName() + " had main account in BanStick?");
 				continue;
 			}
+			updatePlayerStreak(uuid);
 			long sinceLastClaim = currentMillis - lastPlayerUpdate.getValue(uuid);
 			if (sinceLastClaim >= streakDelay) {
 				int currentCount = currentOnlineTime.computeIfAbsent(uuid, e -> 0);
 				if (currentCount >= countRequiredForGain && receiveRewards.getValue(p)) {
-					updatePlayerStreak(uuid);
 					currentOnlineTime.remove(uuid);
 					p.sendMessage(ChatColor.GREEN + "Your login streak is now " + ChatColor.LIGHT_PURPLE
 							+ getCurrentStreak(uuid, true));
